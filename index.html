@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#101014">
+
+    <title>Sound Button</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #101014;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .sound-button {
+            width: 220px;
+            height: 220px;
+            border: none;
+            border-radius: 50%;
+            background: #6c5ce7;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 40px rgba(108, 92, 231, 0.35);
+            transition: transform 0.15s ease,
+                        background 0.15s ease,
+                        box-shadow 0.15s ease;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .sound-button:active {
+            transform: scale(0.92);
+            background: #5142c7;
+            box-shadow: 0 0 60px rgba(108, 92, 231, 0.6);
+        }
+
+        @media (max-width: 480px) {
+            .sound-button {
+                width: 190px;
+                height: 190px;
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <button class="sound-button" id="playButton">
+        NYOMJÁ MEG
+    </button>
+
+    <audio id="sound" src="sound.mp3" preload="auto"></audio>
+
+    <script>
+        const button = document.getElementById("playButton");
+        const sound = document.getElementById("sound");
+
+        button.addEventListener("click", async () => {
+            sound.currentTime = 0;
+
+            try {
+                await sound.play();
+            } catch (error) {
+                console.error("A hang lejátszása sikertelen:", error);
+            }
+        });
+    </script>
+
+</body>
+</html>
